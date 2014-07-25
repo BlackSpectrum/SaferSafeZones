@@ -1,0 +1,5 @@
+name: ${project.name}
+main: ${project.groupId}.safersafezones.SaferSafeZones
+version: ${project.version}
+author: Mats391
+depend: [Factions]
