@@ -100,9 +100,7 @@ public class SaferSafeZones extends JavaPlugin implements Listener
 			final Material item = event.getItem().getType();
 
 			if ( item.equals( Material.EGG ) || item.equals( Material.ENDER_PEARL ) || item.equals( Material.POTION ) )
-			{
 				event.setCancelled( true );
-			}
 		}
 	}
 
@@ -120,6 +118,5 @@ public class SaferSafeZones extends JavaPlugin implements Listener
 		for ( final PotionEffect pot : player.getActivePotionEffects() )
 			player.removePotionEffect( pot.getType() );
 	}
-
 
 }
