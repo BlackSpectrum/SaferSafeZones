@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 
@@ -100,7 +101,18 @@ public class SaferSafeZones extends JavaPlugin implements Listener
 			final Material item = event.getItem().getType();
 
 			if ( item.equals( Material.EGG ) || item.equals( Material.ENDER_PEARL ) || item.equals( Material.POTION ) )
+			{
 				event.setCancelled( true );
+				final ItemStack toDrop = event.getItem().clone();
+				final Player player = event.getPlayer();
+				toDrop.setAmount( 1 );
+				if ( event.getItem().getAmount() == 1 )
+					player.getInventory().remove( event.getItem() );
+				else
+					event.getItem().setAmount( event.getItem().getAmount() - 1 );
+
+				player.getLocation().getWorld().dropItemNaturally( player.getLocation(), toDrop );
+			}
 		}
 	}
 
